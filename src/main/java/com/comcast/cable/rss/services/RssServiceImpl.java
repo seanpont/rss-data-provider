@@ -1,37 +1,43 @@
 package com.comcast.cable.rss.services;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import com.comcast.cable.cvs.rss.reader.RssFeed;
+import com.comcast.cable.cvs.rss.reader.RssFetcher;
 
 public class RssServiceImpl implements RssService{
 
-    private String[] allFeeds;
-    private String[] defaultFeeds;
-    private Map<String, RssFeed> cache;
-    private ExecutorService executor;
+    private final String[] allFeeds;
+    private final String[] defaultFeeds;
 
-    public RssServiceImpl(String[] allFeeds, String[] defaultFeeds) {
+    private final RssFetcher rssFetcher;
+    
+	private final Map<String, RssFeed> cache;
+
+    public RssServiceImpl(String[] allFeeds, String[] defaultFeeds, RssFetcher rssFetcher) {
         this.allFeeds = allFeeds;
         this.defaultFeeds = defaultFeeds;
+        this.rssFetcher = rssFetcher;
         cache = new ConcurrentHashMap<String, RssFeed>();
-        this.executor = Executors.newFixedThreadPool(10);
-        
-        //populate cache
-        for (String feed : allFeeds) {
-            fetch(feed);
-        }
+    }
+    
+    public RssFeed getFeed(String url) {
+    	RssFeed feed = cache.get(url);
+    	if (feed == null) {
+    		feed = fetch(url);
+    		cache.put(url, feed);
+    	}
+    	return feed;
     }
 
-    private void fetch(String feed) {
-        
+    private RssFeed fetch(String url) {
+    	RssFeed feed = rssFetcher.fetchRssFeed(url);
+		cache.put(url, feed);
+		return feed;
     }
 
-    public List<String> getDefaults() {
+    public String[] getDefaults() {
         return null;
     }
 
