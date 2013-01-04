@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="525" started-at="2013-01-03T16:24:32Z" finished-at="2013-01-03T16:24:32Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="525" started-at="2013-01-03T16:24:32Z" finished-at="2013-01-03T16:24:32Z">
+      <class name="com.comcast.cable.rss.services.SearchServiceImplTest">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.comcast.cable.rss.services.SearchServiceImplTest@19484a05]" name="setup" is-config="true" duration-ms="489" started-at="2013-01-03T16:24:32Z" finished-at="2013-01-03T16:24:32Z">
+        </test-method>
+        <test-method status="PASS" signature="testSearch()[pri:0, instance:com.comcast.cable.rss.services.SearchServiceImplTest@19484a05]" name="testSearch" duration-ms="27" started-at="2013-01-03T16:24:32Z" finished-at="2013-01-03T16:24:32Z">
+        </test-method>
+        <test-method status="PASS" signature="teardown()[pri:0, instance:com.comcast.cable.rss.services.SearchServiceImplTest@19484a05]" name="teardown" is-config="true" duration-ms="0" started-at="2013-01-03T16:24:32Z" finished-at="2013-01-03T16:24:32Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

@@ -1,10 +1,12 @@
 package com.comcast.cable.rss.services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.comcast.cable.cvs.rss.reader.RssFeed;
+import com.comcast.cable.cvs.rss.reader.RssFeedSummary;
 
 public class UserServiceImpl implements UserService {
 
@@ -25,12 +27,16 @@ public class UserServiceImpl implements UserService {
         preferences.get(userId).add(feed);
     }
 
-    public List<RssFeed> getFeeds(String userId) {
+    public List<RssFeedSummary> getFeeds(String userId) {
         List<String> list = preferences.get(userId);
         if (list == null) {
-            preferences.put(userId, rssService.getDefaults());
+            preferences.put(userId, Arrays.asList(rssService.getDefaults()));
         }
-        return null;
+        List<RssFeedSummary> feeds = new ArrayList<RssFeedSummary>();
+        for (String url : list) {
+            feeds.add(rssService.getSummary(url));
+        }
+        return feeds;
     }
 
     

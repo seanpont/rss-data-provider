@@ -2,7 +2,7 @@ package com.comcast.cable.rss.services;
 
 import java.util.List;
 
-import com.comcast.cable.cvs.rss.reader.RssFeed;
+import com.comcast.cable.cvs.rss.reader.RssFeedSummary;
 
 public interface UserService {
 
@@ -10,6 +10,6 @@ public interface UserService {
 
     void removeFeed(String userId, String feed);
 
-    List<RssFeed> getFeeds(String userId);
+    List<RssFeedSummary> getFeeds(String userId);
 
 }

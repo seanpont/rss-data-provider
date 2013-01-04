@@ -15,7 +15,8 @@ public class RssFeed {
     private String link;
     private List<RssStory> stories;
     private String url;
-    
+    private int id;
+    private RssFeedSummary summary = new RssFeedSummary();
     
     /**
      * @return the image
@@ -43,6 +44,7 @@ public class RssFeed {
      */
     public void setTitle(String title) {
         this.title = title;
+        summary.setTitle(title);
     }
 
     /**
@@ -57,6 +59,7 @@ public class RssFeed {
      */
     public void setDescription(String description) {
         this.description = description;
+        summary.setDescription(description);
     }
 
     /**
@@ -71,6 +74,7 @@ public class RssFeed {
      */
     public void setLink(String link) {
         this.link = link;
+        summary.setLink(link);
     }
 
     /**
@@ -85,6 +89,7 @@ public class RssFeed {
      */
     public void setStories(List<RssStory> stories) {
         this.stories = stories;
+        summary.setNumStories(stories.size());
     }
 
 
@@ -93,16 +98,31 @@ public class RssFeed {
             stories = new ArrayList<RssStory>();
         }
         stories.add(rssStory);
+        summary.addStory();
     }
 
     public void setUrl(String url) {
         this.url = url;
+        summary.setUrl(url);
+        this.id = url.hashCode();
+        this.summary.setId(id);
     }
     
     public String getUrl() {
         return url;
     }
     
+    public RssFeedSummary getSummary() {
+        return summary;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
     /**
      * @see java.lang.Object#toString()
      */
@@ -110,6 +130,9 @@ public class RssFeed {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("RssFeed [");
+        if (url != null) {
+            builder.append("url=").append(url).append(", ");
+        }
         if (image != null) {
             builder.append("image=").append(image).append(", ");
         }
@@ -131,6 +154,9 @@ public class RssFeed {
         builder.append("]");
         return builder.toString();
     }
+
+
+
     
     
 }
